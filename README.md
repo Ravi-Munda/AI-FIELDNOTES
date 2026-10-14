@@ -1,2 +1,2 @@
-# -AI-FIELDNOTES
+# AI-FIELDNOTES
 AI Exam Practice
