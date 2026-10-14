@@ -16,7 +16,7 @@
   <meta name="description" content="A 100-question, 100-mark exam practice quiz based on the IIT Delhi Introduction to Artificial Intelligence course.">
   <title>AI Fieldnotes — Introduction to Artificial Intelligence</title>
 
-  <link rel="stylesheet" href="./styles.css?v=15">
+  <link rel="stylesheet" href="./styles.css?v=16">
 </head>
 <body>
   <div class="shell">
@@ -46,6 +46,32 @@
           <div class="mini-stats"><div class="mini-stat"><b>12</b><span>Course weeks</span></div><div class="mini-stat"><b>100</b><span>Questions</span></div><div class="mini-stat"><b>1 pt</b><span>Each</span></div></div>
         </aside>
       </section>
+      <section class="progress-section" aria-labelledby="progress-section-title">
+        <div class="section-line" id="progress-section-title">Daily streak &amp; rewards</div>
+        <div class="progress-panel">
+          <div class="streak-overview">
+            <div class="streak-primary">
+              <span class="progress-label-small">Current streak</span>
+              <div class="streak-number"><strong id="streak-current">0</strong><span>days</span></div>
+              <p id="streak-message" class="streak-message">Complete a quiz today to start your streak.</p>
+            </div>
+            <div class="rank-summary">
+              <div id="rank-seal" class="rank-seal" aria-hidden="true">—</div>
+              <div class="rank-summary-copy">
+                <span class="progress-label-small">Highest rank</span>
+                <strong id="rank-current">Unranked</strong>
+                <small id="streak-best">Best streak: 0 days</small>
+              </div>
+            </div>
+          </div>
+          <div class="rank-progress-wrap">
+            <div class="rank-progress-caption"><span id="rank-next-label">First badge: Bronze V</span><span id="rank-next-count">0 / 1 day</span></div>
+            <progress id="rank-progress" class="rank-progress" value="0" max="1" aria-label="Progress toward the next rank badge"></progress>
+          </div>
+        </div>
+        <div class="badge-heading"><h3>Badge ladder</h3><p>Keep a daily quiz streak to unlock each rank.</p></div>
+        <div id="badge-ladder" class="badge-ladder" role="list" aria-label="Streak rank badges"></div>
+      </section>
       <section class="coverage" aria-labelledby="coverage-title">
         <div class="section-line" id="coverage-title">Inside the challenge</div>
         <div class="topic-grid">
@@ -60,7 +86,7 @@
         </div>
         <p class="source-note">Questions are original knowledge checks based on the course themes in <a href="https://youtube.com/playlist?list=PLp6ek2hDcoNB_YJCruBFjhF79f5ZHyBuz" target="_blank" rel="noreferrer">Prof. Mausam's IIT Delhi lecture playlist</a> and the <a href="https://archive.nptel.ac.in/content/syllabus_pdf/106102220.pdf" target="_blank" rel="noreferrer">official NPTEL course outline</a>.</p>
         <hr class="privacy-divider" aria-hidden="true">
-        <p class="hero-note privacy-note">Privacy: quiz answers stay in this browser. There is no account or quiz-results server. Saved progress is not encrypted and can be seen by others using this browser profile; clear it on shared devices.</p>
+        <p class="hero-note privacy-note">Privacy: quiz answers, streak and badge progress stay in this browser. There is no account or quiz-results server. Saved progress is not encrypted and can be seen by others using this browser profile; clear it on shared devices.</p>
         <button id="clear-saved-btn" class="quiet-btn" type="button">Clear saved progress</button>
       </section>
     </main>
