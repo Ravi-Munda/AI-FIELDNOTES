@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="AI Fieldnotes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; manifest-src 'self'; worker-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" sizes="180x180" href="./icons/apple-touch-icon.png">
+  <meta name="theme-color" content="#111713">
+  <meta name="description" content="A 100-question, 100-mark exam practice quiz based on the IIT Delhi Introduction to Artificial Intelligence course.">
+  <title>AI Fieldnotes — Introduction to Artificial Intelligence</title>
+
+  <link rel="stylesheet" href="./styles.css?v=15">
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="AI Fieldnotes home"><span class="brand-mark">∴</span><span>AI <span>FIELDNOTES</span></span></a>
+      <div class="top-right"><span class="status-dot"></span><span class="top-label">Course challenge</span><span aria-hidden="true" class="top-divider">/</span><span class="top-label">IIT Delhi</span><button id="install-btn" class="install-btn" type="button" aria-label="Install AI Fieldnotes">&#8595; <span>Install app</span></button></div>
+    </header>
+
+    <main id="welcome-view">
+      <section class="hero">
+        <div class="hero-copy">
+          <div class="eyebrow">NPTEL AI exam practice</div>
+          <h1>Think like an <span class="accent">agent.</span></h1>
+          <p>From search trees to learning from reward. Take on the ideas at the heart of artificial intelligence, one considered question at a time.</p>
+          <div class="pill-row"><span class="pill"><strong>100</strong> questions</span><span class="pill"><strong>100</strong> marks</span><span class="pill"><strong>90</strong> minutes</span><span class="pill"><strong>35</strong> easy</span><span class="pill"><strong>45</strong> medium</span><span class="pill"><strong>20</strong> hard</span><span class="pill">No negative marking</span></div>
+          <div class="start-actions">
+            <button id="start-btn" class="primary-btn" type="button" disabled aria-busy="true">Loading quiz...</button>
+            <button id="end-saved-btn" class="quiet-btn hidden" type="button">End saved quiz and see results</button>
+          </div>
+          <p id="app-status" class="app-status" role="status" aria-live="polite">Preparing your quiz...</p>
+          <p class="hero-note">100-mark practice quiz; assignment marks are not included. Your progress saves on this device.</p>
+        </div>
+        <aside class="visual-card" aria-label="Quiz overview">
+          <div class="visual-top"><span>Knowledge map / 01</span><span class="live-tag">12 course weeks</span></div>
+          <div class="orbit-wrap"><div class="orbit"><div class="orbit-core">AI</div><span class="orbit-dot"></span><span class="orbit-dot two"></span></div></div>
+          <div class="visual-caption">PERCEIVE&nbsp; → &nbsp;REASON&nbsp; → &nbsp;ACT&nbsp; → &nbsp;LEARN</div>
+          <div class="mini-stats"><div class="mini-stat"><b>12</b><span>Course weeks</span></div><div class="mini-stat"><b>100</b><span>Questions</span></div><div class="mini-stat"><b>1 pt</b><span>Each</span></div></div>
+        </aside>
+      </section>
+      <section class="coverage" aria-labelledby="coverage-title">
+        <div class="section-line" id="coverage-title">Inside the challenge</div>
+        <div class="topic-grid">
+          <div class="topic-chip"><b>01 / FOUNDATIONS</b>Agents & problem formulation</div>
+          <div class="topic-chip"><b>02 / SEARCH</b>Uninformed & heuristic search</div>
+          <div class="topic-chip"><b>03 / STRATEGY</b>Local & adversarial search</div>
+          <div class="topic-chip"><b>04 / KNOWLEDGE</b>CSPs, logic & SAT</div>
+          <div class="topic-chip"><b>05 / UNCERTAINTY</b>Bayesian networks & decisions</div>
+          <div class="topic-chip"><b>06 / SEQUENTIAL</b>MDPs & reinforcement learning</div>
+          <div class="topic-chip"><b>07 / LEARNING</b>Deep learning fundamentals</div>
+          <div class="topic-chip"><b>08 / APPLICATION</b>Deep reinforcement learning</div>
+        </div>
+        <p class="source-note">Questions are original knowledge checks based on the course themes in <a href="https://youtube.com/playlist?list=PLp6ek2hDcoNB_YJCruBFjhF79f5ZHyBuz" target="_blank" rel="noreferrer">Prof. Mausam's IIT Delhi lecture playlist</a> and the <a href="https://archive.nptel.ac.in/content/syllabus_pdf/106102220.pdf" target="_blank" rel="noreferrer">official NPTEL course outline</a>.</p>
+        <hr class="privacy-divider" aria-hidden="true">
+        <p class="hero-note privacy-note">Privacy: quiz answers stay in this browser. There is no account or quiz-results server. Saved progress is not encrypted and can be seen by others using this browser profile; clear it on shared devices.</p>
+        <button id="clear-saved-btn" class="quiet-btn" type="button">Clear saved progress</button>
+      </section>
+    </main>
+
+    <main id="quiz-view" class="hidden" aria-live="polite"></main>
+    <main id="result-view" class="hidden"></main>
+    <footer class="footer"><span>AI FIELDNOTES &nbsp;·&nbsp; INTRODUCTION TO ARTIFICIAL INTELLIGENCE</span><span>Independent study aid. Not affiliated with NPTEL or IIT Delhi.</span></footer>
+  </div>
+
+  <div id="modal-root"></div>
+  <div id="toast-root" aria-live="polite"></div>
+    <script src="./app.js" defer></script>
+</body>
+</html>

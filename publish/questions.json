@@ -1,0 +1,1302 @@
+[
+  {
+    "question": "In the rational-agent view of AI, what should an agent do?",
+    "options": [
+      "Choose actions expected to maximize its performance measure, given what it has perceived",
+      "Always imitate the most common human action",
+      "Store every possible state before acting",
+      "Choose actions randomly so it cannot be biased"
+    ],
+    "answer": 0,
+    "explanation": "A rational agent selects an action that maximizes expected performance based on its percept history and available knowledge. Rationality does not mean omniscience or perfect success.",
+    "topic": "AI foundations",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which set most completely specifies a classical search problem?",
+    "options": [
+      "A training set, loss function, and learning rate",
+      "A start state, actions or successor function, goal test, and path-cost function",
+      "A utility table and a discount factor only",
+      "A list of states with no transition rules"
+    ],
+    "answer": 1,
+    "explanation": "A search problem specifies where to start, how actions generate successor states, how to recognize a goal, and how to measure path cost.",
+    "topic": "Problem formulation",
+    "difficulty": "easy"
+  },
+  {
+    "question": "When every step has the same cost, which search strategy finds a shallowest goal first?",
+    "options": [
+      "Depth-first search",
+      "Hill climbing",
+      "Breadth-first search",
+      "Greedy best-first search"
+    ],
+    "answer": 2,
+    "explanation": "Breadth-first search expands the frontier in increasing depth order. With equal step costs, the shallowest goal is also a least-cost goal.",
+    "topic": "Uninformed search",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Uniform-cost search chooses which frontier node to expand next?",
+    "options": [
+      "The node with the greatest depth",
+      "The node with the smallest estimated remaining cost h(n), ignoring the path so far",
+      "The most recently generated node",
+      "The node with the smallest accumulated path cost g(n)"
+    ],
+    "answer": 3,
+    "explanation": "Uniform-cost search prioritizes the lowest path cost so far, g(n). With nonnegative step costs, it is complete and returns an optimal solution.",
+    "topic": "Uninformed search",
+    "difficulty": "easy"
+  },
+  {
+    "question": "What is a common limitation of depth-first search?",
+    "options": [
+      "It can follow a very deep or infinite branch and is not generally optimal",
+      "It must keep every generated node in memory",
+      "It cannot be used when actions have unit cost",
+      "It always expands nodes in increasing path-cost order"
+    ],
+    "answer": 0,
+    "explanation": "Depth-first search uses relatively little frontier memory, but can get trapped down a deep branch and does not generally find the shallowest or cheapest solution.",
+    "topic": "Uninformed search",
+    "difficulty": "easy"
+  },
+  {
+    "question": "A* search evaluates a node using which expression?",
+    "options": [
+      "f(n) = g(n) - h(n)",
+      "f(n) = g(n) + h(n)",
+      "f(n) = h(n) only",
+      "f(n) = depth(n) × branching factor"
+    ],
+    "answer": 1,
+    "explanation": "A* combines the cost already paid, g(n), with a heuristic estimate of the remaining cost, h(n).",
+    "topic": "Heuristic search",
+    "difficulty": "easy"
+  },
+  {
+    "question": "For a minimization problem, what makes a heuristic admissible?",
+    "options": [
+      "It always equals the true remaining cost",
+      "It is larger than the true cost for every non-goal state",
+      "It never overestimates the true minimum cost from a node to a goal",
+      "It is based only on the depth of a node"
+    ],
+    "answer": 2,
+    "explanation": "An admissible heuristic is optimistic: h(n) is no greater than the actual cheapest remaining cost. This property supports A* optimality under the usual search conditions.",
+    "topic": "Heuristic search",
+    "difficulty": "easy"
+  },
+  {
+    "question": "How can a relaxed version of a problem help create a heuristic?",
+    "options": [
+      "Add extra constraints until no actions remain",
+      "Replace all step costs with random values",
+      "Use the exact solution to the original problem as the heuristic",
+      "Solve the easier problem after removing constraints; its optimal cost can estimate the original problem"
+    ],
+    "answer": 3,
+    "explanation": "A relaxed problem removes some restrictions, making it easier to solve. Its optimal cost is often a lower bound on the original problem's cost and can serve as an admissible heuristic.",
+    "topic": "Heuristic search",
+    "difficulty": "medium"
+  },
+  {
+    "question": "A hill-climbing algorithm stops improving even though a better state exists elsewhere. What is a likely cause?",
+    "options": [
+      "It reached a local maximum, plateau, or ridge",
+      "It expanded the entire state space in cost order",
+      "Its goal test became a Bayesian network",
+      "Its path cost is guaranteed to be optimal"
+    ],
+    "answer": 0,
+    "explanation": "Hill climbing uses nearby improvements and typically has no full search tree. Local maxima, plateaus, and ridges can prevent it from reaching a better global solution.",
+    "topic": "Local search",
+    "difficulty": "medium"
+  },
+  {
+    "question": "In a genetic algorithm, what is the main role of crossover?",
+    "options": [
+      "Guarantee that the best possible solution is found",
+      "Combine portions of selected parent representations to produce candidate offspring",
+      "Measure the probability of a state given its evidence",
+      "Remove every low-cost individual from the population"
+    ],
+    "answer": 1,
+    "explanation": "Crossover recombines parts of parent encodings. Selection favors fitter candidates, while mutation introduces occasional variation; neither guarantees a global optimum.",
+    "topic": "Genetic algorithms",
+    "difficulty": "easy"
+  },
+  {
+    "question": "In minimax search for a two-player, zero-sum game, what does the minimizing player do?",
+    "options": [
+      "Choose a move that maximizes the maximizing player's score",
+      "Ignore the opponent's possible replies",
+      "Choose a move that minimizes the value available to the maximizing player",
+      "Select a move uniformly at random at every turn"
+    ],
+    "answer": 2,
+    "explanation": "Minimax models alternating play: MAX chooses the highest-valued option and MIN chooses the lowest, assuming both players act optimally.",
+    "topic": "Adversarial search",
+    "difficulty": "easy"
+  },
+  {
+    "question": "What does alpha-beta pruning do to a minimax search?",
+    "options": [
+      "Changes the utility values to make search faster",
+      "Guarantees a different move from minimax",
+      "Removes the need to evaluate terminal states",
+      "Skips branches that cannot change the final minimax choice"
+    ],
+    "answer": 3,
+    "explanation": "Alpha-beta pruning uses bounds from already explored branches to discard branches that cannot affect the result. It returns the same choice as minimax for the same search depth.",
+    "topic": "Adversarial search",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Which description matches a constraint-satisfaction problem (CSP)?",
+    "options": [
+      "Variables have domains of values, and constraints restrict which combinations are allowed",
+      "A graph has only a start state and no goal test",
+      "An agent learns rewards only through trial and error",
+      "A neural network adjusts weights using gradients"
+    ],
+    "answer": 0,
+    "explanation": "A CSP consists of variables, a domain for each variable, and constraints that specify which assignments are consistent.",
+    "topic": "Constraint satisfaction",
+    "difficulty": "easy"
+  },
+  {
+    "question": "What does enforcing arc consistency remove from a variable's domain?",
+    "options": [
+      "Every value except the one chosen first",
+      "Values that have no compatible supporting value in a neighboring variable's domain",
+      "Values that satisfy all neighboring constraints",
+      "The variable with the largest domain"
+    ],
+    "answer": 1,
+    "explanation": "For an arc from X to Y, each remaining value of X must have at least one value of Y that satisfies their constraint. Unsupported values can be pruned.",
+    "topic": "Constraint satisfaction",
+    "difficulty": "medium"
+  },
+  {
+    "question": "A propositional formula is satisfiable when…",
+    "options": [
+      "Every possible assignment makes the formula true",
+      "It contains no logical connectives",
+      "At least one assignment of truth values makes the formula true",
+      "It has exactly one variable"
+    ],
+    "answer": 2,
+    "explanation": "Satisfiability asks whether there exists an assignment of truth values under which the entire formula evaluates to true. A tautology is stronger: it is true under every assignment.",
+    "topic": "Logic and SAT",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which formula is logically equivalent to the implication P → Q?",
+    "options": [
+      "P ∧ ¬Q",
+      "P ∨ Q",
+      "¬P ∧ ¬Q",
+      "¬P ∨ Q"
+    ],
+    "answer": 3,
+    "explanation": "An implication is false only when P is true and Q is false. The disjunction ¬P ∨ Q has exactly that truth condition.",
+    "topic": "Logic and SAT",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Bayes' rule is especially useful for calculating…",
+    "options": [
+      "The probability of a hypothesis after observing evidence",
+      "The shortest path through an unweighted graph",
+      "The number of satisfying assignments to a formula",
+      "The derivative of a neural-network loss"
+    ],
+    "answer": 0,
+    "explanation": "Bayes' rule updates a prior belief using evidence: P(H|E) = P(E|H)P(H) / P(E), when P(E) is nonzero.",
+    "topic": "Bayesian reasoning",
+    "difficulty": "easy"
+  },
+  {
+    "question": "What does a Bayesian network encode with its directed acyclic graph?",
+    "options": [
+      "A deterministic ordering of all search paths",
+      "A factorization of a joint probability distribution using conditional dependencies",
+      "A set of game-tree payoffs only",
+      "A neural network's learned weight values"
+    ],
+    "answer": 1,
+    "explanation": "Each node represents a random variable; directed links express dependencies, and each node has a conditional probability distribution given its parents. Together they factor the joint distribution.",
+    "topic": "Bayesian networks",
+    "difficulty": "easy"
+  },
+  {
+    "question": "In a Bayesian network, what is evidence?",
+    "options": [
+      "A heuristic estimate for the cost of a path",
+      "An action that must have a positive reward",
+      "Observed values of one or more variables used to update probabilities",
+      "A clause that makes every assignment satisfiable"
+    ],
+    "answer": 2,
+    "explanation": "Evidence is the observed assignment of variables. Inference computes updated probabilities for other variables conditioned on those observations.",
+    "topic": "Inference and decisions",
+    "difficulty": "easy"
+  },
+  {
+    "question": "When should a rational decision maker choose an action under expected-utility theory?",
+    "options": [
+      "Choose the action with the most possible outcomes",
+      "Always choose the outcome with the highest probability, regardless of value",
+      "Choose the action with the lowest immediate reward",
+      "Choose the action with the greatest expected utility under the relevant outcome probabilities"
+    ],
+    "answer": 3,
+    "explanation": "Expected utility weights each possible outcome's utility by its probability. The preferred action maximizes that expectation, which accounts for both likelihood and value.",
+    "topic": "Inference and decisions",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Which ingredients are central to a Markov decision process (MDP)?",
+    "options": [
+      "States, actions, transition probabilities, rewards, and a discount factor",
+      "Only a set of propositional clauses",
+      "Parents, child nodes, and conditional probability tables only",
+      "A population of chromosomes and mutation rates"
+    ],
+    "answer": 0,
+    "explanation": "An MDP models sequential decisions with states, actions, probabilistic transitions, rewards, and usually a discount factor. The Markov property says the next state depends on the current state and action, not the full past.",
+    "topic": "Markov decision processes",
+    "difficulty": "easy"
+  },
+  {
+    "question": "What is the purpose of the discount factor γ in a discounted MDP?",
+    "options": [
+      "It determines how many variables are in the state",
+      "It controls how much future rewards count relative to immediate rewards",
+      "It makes every transition deterministic",
+      "It measures the depth of the search tree"
+    ],
+    "answer": 1,
+    "explanation": "A discount factor between 0 and 1 scales rewards by how far in the future they occur. A smaller γ gives relatively more weight to immediate rewards.",
+    "topic": "Markov decision processes",
+    "difficulty": "medium"
+  },
+  {
+    "question": "In reinforcement learning, what information does an agent typically receive while learning?",
+    "options": [
+      "The correct action label for every possible state",
+      "A complete proof of the optimal policy before acting",
+      "Feedback such as rewards after taking actions in an environment",
+      "Only the names of all possible states"
+    ],
+    "answer": 2,
+    "explanation": "Reinforcement learning learns behavior through interaction. The agent selects actions and receives evaluative feedback, commonly rewards, rather than a correct action label for each state.",
+    "topic": "Reinforcement learning",
+    "difficulty": "easy"
+  },
+  {
+    "question": "What is the main role of backpropagation in training a neural network?",
+    "options": [
+      "Guarantee that the network reaches a global optimum",
+      "Choose the next state from an MDP transition table",
+      "Convert a Bayesian network into a search tree",
+      "Compute gradients of a loss with respect to the network's parameters"
+    ],
+    "answer": 3,
+    "explanation": "Backpropagation applies the chain rule to compute how the loss changes with network parameters. An optimizer then uses those gradients to update the parameters; global optimality is not guaranteed.",
+    "topic": "Deep learning",
+    "difficulty": "easy"
+  },
+  {
+    "question": "What makes deep reinforcement learning different from tabular reinforcement learning?",
+    "options": [
+      "A deep neural network can approximate value functions or policies over large or complex state spaces",
+      "It removes rewards and actions from the learning problem",
+      "It requires every state to have a hand-written optimal action",
+      "It guarantees better performance in every environment"
+    ],
+    "answer": 0,
+    "explanation": "Deep RL combines reinforcement-learning objectives with neural networks that can approximate policies or value functions, helping represent problems where a table over all states is impractical.",
+    "topic": "Deep reinforcement learning",
+    "difficulty": "medium"
+  },
+  {
+    "question": "What does the classic Turing test evaluate?",
+    "options": [
+      "Whether the machine can solve every mathematical problem",
+      "Whether a human judge can reliably distinguish a machine from a human in conversation",
+      "Whether it has the same internal structure as a human brain",
+      "Whether it can learn without any data"
+    ],
+    "answer": 1,
+    "explanation": "The imitation-game test focuses on observable conversational behavior, not human-like internal processes.",
+    "topic": "AI foundations",
+    "difficulty": "easy"
+  },
+  {
+    "question": "In a PEAS task description, what does E stand for?",
+    "options": [
+      "Evidence",
+      "Evaluation algorithm",
+      "Environment",
+      "Experience replay"
+    ],
+    "answer": 2,
+    "explanation": "PEAS names the performance measure, environment, actuators, and sensors.",
+    "topic": "AI foundations",
+    "difficulty": "easy"
+  },
+  {
+    "question": "How does an agent normally affect its environment?",
+    "options": [
+      "It receives percepts through actuators",
+      "It sends actions through sensors",
+      "It changes the performance measure directly",
+      "It sends actions through actuators"
+    ],
+    "answer": 3,
+    "explanation": "Sensors provide percepts; actuators carry chosen actions back to the environment.",
+    "topic": "AI foundations",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which information helps determine whether an action is rational?",
+    "options": [
+      "The agent's percept history, available actions, and task performance measure",
+      "Only which action proved best after the event",
+      "Only the size of the agent's program",
+      "The actions of every other agent in every possible environment"
+    ],
+    "answer": 0,
+    "explanation": "Rationality is judged using the evidence available and expected performance against the task measure.",
+    "topic": "AI foundations",
+    "difficulty": "medium"
+  },
+  {
+    "question": "What does the initial state specify in a search problem?",
+    "options": [
+      "The first goal state that must be reached",
+      "The state from which search begins",
+      "The heuristic value of every state",
+      "The complete action sequence to the goal"
+    ],
+    "answer": 1,
+    "explanation": "The initial state represents the situation before any search action is taken.",
+    "topic": "Problem formulation",
+    "difficulty": "easy"
+  },
+  {
+    "question": "What does a transition model specify?",
+    "options": [
+      "Whether a heuristic is admissible",
+      "How a human scores a goal state",
+      "The state reached after applying an action in a state",
+      "Which search algorithm must be used"
+    ],
+    "answer": 2,
+    "explanation": "A transition model describes action results and lets search generate successor states.",
+    "topic": "Problem formulation",
+    "difficulty": "easy"
+  },
+  {
+    "question": "What is the role of a goal test?",
+    "options": [
+      "Estimate the remaining path cost",
+      "Choose the cheapest frontier node",
+      "Reverse an action to return to the start",
+      "Determine whether a state satisfies the desired objective"
+    ],
+    "answer": 3,
+    "explanation": "The goal test checks whether a reached state solves the problem.",
+    "topic": "Problem formulation",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which data structure makes breadth-first search expand the oldest frontier node first?",
+    "options": [
+      "A first-in, first-out queue",
+      "A last-in, first-out stack",
+      "A priority queue ordered by heuristic",
+      "A priority queue ordered by path cost"
+    ],
+    "answer": 0,
+    "explanation": "A FIFO queue expands nodes in increasing depth order.",
+    "topic": "Uninformed search",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which data structure gives depth-first search its last-in, first-out behavior?",
+    "options": [
+      "A FIFO queue",
+      "A stack",
+      "A table sorted by path cost",
+      "A table sorted by estimated goal distance"
+    ],
+    "answer": 1,
+    "explanation": "Depth-first search explores the most recently added node first.",
+    "topic": "Uninformed search",
+    "difficulty": "easy"
+  },
+  {
+    "question": "What is the main benefit of iterative deepening search?",
+    "options": [
+      "It guarantees lowest cost when step costs differ",
+      "It expands each state exactly once",
+      "It finds a shallowest goal with memory use close to depth-first search",
+      "It avoids repeating work between depth limits"
+    ],
+    "answer": 2,
+    "explanation": "Repeated depth-limited searches use little memory and find the shallowest goal for equal step costs.",
+    "topic": "Uninformed search",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Why does graph search record reached states?",
+    "options": [
+      "To make all edge costs equal",
+      "To compute a heuristic without domain knowledge",
+      "To make depth-first search optimal",
+      "To avoid repeatedly expanding a state reached by different paths"
+    ],
+    "answer": 3,
+    "explanation": "A reached-state set prevents cycles and duplicate work.",
+    "topic": "Uninformed search",
+    "difficulty": "medium"
+  },
+  {
+    "question": "With nonnegative action costs, which node does uniform-cost search expand next?",
+    "options": [
+      "The frontier node with the smallest accumulated path cost g(n)",
+      "The frontier node with the smallest depth",
+      "The node with the largest heuristic",
+      "The most recently generated node"
+    ],
+    "answer": 0,
+    "explanation": "Uniform-cost search orders the frontier by the cost already paid from the start.",
+    "topic": "Uninformed search",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Why can bidirectional search use about b^(d/2) work per direction for a solution at depth d?",
+    "options": [
+      "It removes half the actions from every state",
+      "Each search reaches roughly halfway before the frontiers meet",
+      "It uses a heuristic equal to the remaining distance",
+      "It changes the branching factor to one"
+    ],
+    "answer": 1,
+    "explanation": "Each direction searches to about depth d/2 rather than one direction searching to depth d.",
+    "topic": "Uninformed search",
+    "difficulty": "hard"
+  },
+  {
+    "question": "Which situation can keep depth-first search from ever reaching a goal?",
+    "options": [
+      "The goal is at finite depth in a finite tree",
+      "Every action has equal positive cost",
+      "It follows an infinite path before backtracking",
+      "The frontier is stored in a stack"
+    ],
+    "answer": 2,
+    "explanation": "In an infinite-depth space, DFS can follow one endless branch and never explore a goal elsewhere.",
+    "topic": "Uninformed search",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which quantity does greedy best-first search use to rank frontier nodes?",
+    "options": [
+      "The path cost g(n) alone",
+      "The sum g(n) + h(n)",
+      "The number of nodes already expanded",
+      "The heuristic estimate h(n) alone"
+    ],
+    "answer": 3,
+    "explanation": "Greedy best-first search uses estimated distance to the goal and ignores cost already paid.",
+    "topic": "Heuristic search",
+    "difficulty": "easy"
+  },
+  {
+    "question": "In A*, what do g(n) and h(n) represent in f(n) = g(n) + h(n)?",
+    "options": [
+      "Cost so far and estimated cost remaining",
+      "Estimated cost remaining and branching factor",
+      "Depth and number of goals",
+      "Reward and discount factor"
+    ],
+    "answer": 0,
+    "explanation": "A* adds incurred path cost to an estimate of the remaining cost.",
+    "topic": "Heuristic search",
+    "difficulty": "easy"
+  },
+  {
+    "question": "For a minimization task, what makes h(n) admissible?",
+    "options": [
+      "It is at least the true remaining cost",
+      "It never overestimates the true minimum cost from n to a goal",
+      "It is identical for all nodes at one depth",
+      "It strictly decreases after every action"
+    ],
+    "answer": 1,
+    "explanation": "An admissible heuristic is optimistic: it does not exceed the actual least remaining cost.",
+    "topic": "Heuristic search",
+    "difficulty": "easy"
+  },
+  {
+    "question": "What condition expresses heuristic consistency across an edge n to n'?",
+    "options": [
+      "h(n) is always greater than g(n)",
+      "h(n') is zero for every successor",
+      "h(n) <= c(n,n') + h(n')",
+      "h(n) equals the number of successors"
+    ],
+    "answer": 2,
+    "explanation": "Consistency requires h(n) <= c(n,n') + h(n') for every edge, with zero at a goal.",
+    "topic": "Heuristic search",
+    "difficulty": "medium"
+  },
+  {
+    "question": "If admissible h1(n) >= h2(n) everywhere, what is generally true of h1 for A*?",
+    "options": [
+      "It must be inadmissible",
+      "It makes A* equivalent to DFS",
+      "It guarantees every node is expanded",
+      "It is more informed and A* usually expands no more nodes with it"
+    ],
+    "answer": 3,
+    "explanation": "A larger admissible estimate is closer to the true remaining cost and can guide search more strongly.",
+    "topic": "Heuristic search",
+    "difficulty": "hard"
+  },
+  {
+    "question": "What does A* become when h(n) = 0 for every node?",
+    "options": [
+      "Uniform-cost search",
+      "Greedy best-first search",
+      "Breadth-first search for arbitrary costs",
+      "Depth-first search"
+    ],
+    "answer": 0,
+    "explanation": "With a zero heuristic, A* ranks nodes only by g(n), as uniform-cost search does.",
+    "topic": "Heuristic search",
+    "difficulty": "easy"
+  },
+  {
+    "question": "How does iterative-deepening A* choose its successive search limits?",
+    "options": [
+      "It raises a threshold on the number of children",
+      "It raises a threshold on f(n) = g(n) + h(n)",
+      "It lowers the maximum path cost each pass",
+      "It limits the number of probability samples"
+    ],
+    "answer": 1,
+    "explanation": "IDA* performs depth-first passes bounded by an f-cost threshold and raises it when needed.",
+    "topic": "Heuristic search",
+    "difficulty": "hard"
+  },
+  {
+    "question": "With a consistent heuristic, how does A*'s f value behave along a path?",
+    "options": [
+      "It decreases by one at every step",
+      "It always equals h(n)",
+      "It never decreases",
+      "It alternates between zero and path cost"
+    ],
+    "answer": 2,
+    "explanation": "Consistency ensures f(successor) is at least f(parent).",
+    "topic": "Heuristic search",
+    "difficulty": "medium"
+  },
+  {
+    "question": "How can simulated annealing escape a local optimum?",
+    "options": [
+      "It stores every path from the start",
+      "It permanently removes worse neighbors",
+      "It replaces the objective with a random goal test",
+      "It sometimes accepts a worse move, especially when temperature is high"
+    ],
+    "answer": 3,
+    "explanation": "Occasional uphill moves can cross barriers; their probability falls as temperature decreases.",
+    "topic": "Local search",
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the purpose of random-restart hill climbing?",
+    "options": [
+      "Try new starting states when a run gets stuck in a local optimum",
+      "Give every run a different goal test",
+      "Guarantee the best solution after one step",
+      "Remember every possible path"
+    ],
+    "answer": 0,
+    "explanation": "Different starting states can place the search in a better basin of attraction.",
+    "topic": "Local search",
+    "difficulty": "easy"
+  },
+  {
+    "question": "What does beam search retain when its beam width is k?",
+    "options": [
+      "Every state at every depth",
+      "At most the k most promising states at each level",
+      "Exactly one state regardless of k",
+      "Only states with zero path cost"
+    ],
+    "answer": 1,
+    "explanation": "Beam search limits memory by retaining a fixed number of promising candidates.",
+    "topic": "Local search",
+    "difficulty": "medium"
+  },
+  {
+    "question": "In min-conflicts search, how is a value chosen for a conflicted variable?",
+    "options": [
+      "Choose the value that maximizes its domain",
+      "Choose a value that violates every constraint",
+      "Choose a value that minimizes the number of violated constraints",
+      "Choose the alphabetically first value"
+    ],
+    "answer": 2,
+    "explanation": "Min-conflicts repairs an assignment by changing a conflicted variable to reduce violations.",
+    "topic": "Local search",
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the purpose of mutation in a genetic algorithm?",
+    "options": [
+      "Guarantee the best candidate is discarded",
+      "Calculate each candidate's fitness",
+      "Convert the population into a search tree",
+      "Introduce new variation into candidate solutions"
+    ],
+    "answer": 3,
+    "explanation": "Mutation changes parts of selected candidates and can introduce variation absent from the population.",
+    "topic": "Genetic algorithms",
+    "difficulty": "easy"
+  },
+  {
+    "question": "What does a fitness function provide in a genetic algorithm?",
+    "options": [
+      "A score for comparing how well candidates meet the objective",
+      "Proof the global optimum has been found",
+      "A list of legal actions in each state",
+      "A fixed number of generations"
+    ],
+    "answer": 0,
+    "explanation": "Fitness evaluates candidates so selection can favor better-performing solutions.",
+    "topic": "Genetic algorithms",
+    "difficulty": "easy"
+  },
+  {
+    "question": "At a MAX node in minimax search, how is the value computed?",
+    "options": [
+      "Take the minimum child value",
+      "Take the maximum value among its children",
+      "Take the average of all terminal states",
+      "Choose the deepest child"
+    ],
+    "answer": 1,
+    "explanation": "MAX chooses the action with the highest backed-up utility.",
+    "topic": "Adversarial search",
+    "difficulty": "medium"
+  },
+  {
+    "question": "What does alpha represent in alpha-beta pruning?",
+    "options": [
+      "The best value MIN can guarantee",
+      "The probability of a random move",
+      "The best value MAX can guarantee so far along the current path",
+      "The search depth limit"
+    ],
+    "answer": 2,
+    "explanation": "Alpha is a lower bound on MAX's achievable value from choices examined so far.",
+    "topic": "Adversarial search",
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is a heuristic evaluation function used for at a minimax cutoff?",
+    "options": [
+      "Prove the exact outcome of every unfinished game",
+      "Replace the legal-action generator",
+      "Choose a winner randomly",
+      "Estimate a nonterminal position when deeper search stops"
+    ],
+    "answer": 3,
+    "explanation": "At a depth limit, an evaluation function estimates position quality before a terminal outcome is reached.",
+    "topic": "Adversarial search",
+    "difficulty": "medium"
+  },
+  {
+    "question": "What does an expectimax chance node compute from its children?",
+    "options": [
+      "The probability-weighted expected value",
+      "The maximum child value in every case",
+      "The minimum child value in every case",
+      "The most recently generated value"
+    ],
+    "answer": 0,
+    "explanation": "A chance node averages possible outcomes using their probabilities.",
+    "topic": "Adversarial search",
+    "difficulty": "hard"
+  },
+  {
+    "question": "What does examining promising moves earlier do in alpha-beta search?",
+    "options": [
+      "It changes the rules of the game",
+      "It can increase pruning without changing the minimax result",
+      "It makes pruning impossible",
+      "It changes MAX nodes into chance nodes"
+    ],
+    "answer": 1,
+    "explanation": "Move ordering makes alpha and beta bounds useful sooner but leaves the exact minimax value unchanged.",
+    "topic": "Adversarial search",
+    "difficulty": "hard"
+  },
+  {
+    "question": "What does the minimum-remaining-values heuristic select next?",
+    "options": [
+      "The variable with the largest original domain",
+      "The variable with the fewest neighbors",
+      "The unassigned variable with the fewest legal values left",
+      "The variable assigned most recently"
+    ],
+    "answer": 2,
+    "explanation": "MRV chooses the most constrained variable and can expose a dead end early.",
+    "topic": "Constraint satisfaction",
+    "difficulty": "medium"
+  },
+  {
+    "question": "What does the degree heuristic prefer when choosing a CSP variable?",
+    "options": [
+      "The variable with the largest domain",
+      "The variable with the smallest label",
+      "The variable with no constraints",
+      "The variable constraining the largest number of other unassigned variables"
+    ],
+    "answer": 3,
+    "explanation": "The degree heuristic prioritizes the variable that affects the most remaining choices.",
+    "topic": "Constraint satisfaction",
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the least-constraining-value heuristic designed to do?",
+    "options": [
+      "Choose the value that rules out the fewest values for neighbors",
+      "Choose the value that creates the most conflicts",
+      "Choose the value that empties a domain",
+      "Choose the first value found by DFS"
+    ],
+    "answer": 0,
+    "explanation": "LCV preserves flexibility for other variables by eliminating as few options as possible.",
+    "topic": "Constraint satisfaction",
+    "difficulty": "medium"
+  },
+  {
+    "question": "What does forward checking do after assigning a CSP variable?",
+    "options": [
+      "Undo all earlier assignments",
+      "Remove incompatible values from neighboring unassigned variables' domains",
+      "Add values that violate constraints",
+      "Search every complete assignment immediately"
+    ],
+    "answer": 1,
+    "explanation": "Forward checking propagates an assignment to direct neighbors and detects domain wipeouts early.",
+    "topic": "Constraint satisfaction",
+    "difficulty": "medium"
+  },
+  {
+    "question": "What does it mean for x in X's domain to have support in Y under a binary constraint?",
+    "options": [
+      "Every value in Y satisfies every problem constraint",
+      "Y has already been assigned",
+      "Some value y in Y's domain satisfies the constraint with x",
+      "x is the only value left in the CSP"
+    ],
+    "answer": 2,
+    "explanation": "Arc consistency keeps a value only when the neighboring domain has a compatible supporting value.",
+    "topic": "Constraint satisfaction",
+    "difficulty": "medium"
+  },
+  {
+    "question": "When AC-3 removes values from a domain while revising an arc, what happens next?",
+    "options": [
+      "The algorithm stops permanently after one change",
+      "All variables are assigned at random",
+      "Every constraint is replaced by a heuristic",
+      "Affected neighboring arcs are put back on the work queue"
+    ],
+    "answer": 3,
+    "explanation": "A domain change may invalidate support on other arcs, so AC-3 revisits affected neighbors.",
+    "topic": "Constraint satisfaction",
+    "difficulty": "hard"
+  },
+  {
+    "question": "If a CSP constraint graph has disconnected components, what can be done?",
+    "options": [
+      "Solve each component independently and combine their assignments",
+      "Discard every component except the largest",
+      "Add constraints between every component",
+      "Require variables in different components to be equal"
+    ],
+    "answer": 0,
+    "explanation": "Without constraints connecting components, a choice in one cannot affect consistency in another.",
+    "topic": "Constraint satisfaction",
+    "difficulty": "hard"
+  },
+  {
+    "question": "What does propositional entailment KB |= alpha mean?",
+    "options": [
+      "At least one model satisfies both",
+      "Every model satisfying KB also satisfies alpha",
+      "Alpha is longer than each KB sentence",
+      "KB and alpha have identical syntax"
+    ],
+    "answer": 1,
+    "explanation": "Entailment means alpha is true in every model of the knowledge base.",
+    "topic": "Logic and SAT",
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the structure of conjunctive normal form (CNF)?",
+    "options": [
+      "A disjunction of conjunctions of variables only",
+      "A sequence of implications with no negations",
+      "A conjunction of clauses, each a disjunction of literals",
+      "A probability distribution over truth assignments"
+    ],
+    "answer": 2,
+    "explanation": "CNF is an AND of clauses, and each clause is an OR of literals.",
+    "topic": "Logic and SAT",
+    "difficulty": "medium"
+  },
+  {
+    "question": "How many positive literals can a Horn clause contain at most?",
+    "options": [
+      "Zero literals of any kind",
+      "Exactly two",
+      "An unlimited number",
+      "One"
+    ],
+    "answer": 3,
+    "explanation": "A Horn clause has at most one unnegated, or positive, literal.",
+    "topic": "Logic and SAT",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Which resolvent follows from (P OR A) and (NOT P OR B)?",
+    "options": [
+      "A OR B",
+      "P AND NOT P",
+      "A AND B",
+      "NOT A OR NOT B"
+    ],
+    "answer": 0,
+    "explanation": "Resolution removes the complementary literals P and NOT P and joins what remains.",
+    "topic": "Logic and SAT",
+    "difficulty": "medium"
+  },
+  {
+    "question": "How does forward chaining use definite Horn rules?",
+    "options": [
+      "It guesses a goal and works backward",
+      "It repeatedly derives conclusions whose premises are already known",
+      "It samples truth assignments probabilistically",
+      "It deletes every fact not yet used"
+    ],
+    "answer": 1,
+    "explanation": "Forward chaining is data-driven: known facts trigger rules and add conclusions.",
+    "topic": "Logic and SAT",
+    "difficulty": "medium"
+  },
+  {
+    "question": "How does backward chaining usually answer a query?",
+    "options": [
+      "Enumerate every action in an MDP",
+      "Expand the shallowest search-tree node",
+      "Treat the query as a goal and search for rules and facts that support it",
+      "Change the query into a utility value"
+    ],
+    "answer": 2,
+    "explanation": "Backward chaining is goal-driven and recursively looks for premises that establish the query.",
+    "topic": "Logic and SAT",
+    "difficulty": "hard"
+  },
+  {
+    "question": "What is unit propagation in a SAT solver?",
+    "options": [
+      "A clause with no literals forces every variable true",
+      "A random variable is sampled once",
+      "Every literal in every clause is removed",
+      "A unit clause forces its only remaining literal to be true"
+    ],
+    "answer": 3,
+    "explanation": "If a clause has only one unassigned literal, that literal must be true for the clause to be satisfied.",
+    "topic": "Logic and SAT",
+    "difficulty": "medium"
+  },
+  {
+    "question": "What kind of method is WalkSAT?",
+    "options": [
+      "A stochastic local-search method that flips variables to reduce unsatisfied clauses",
+      "A complete tree search that always proves unsatisfiability",
+      "A Bayesian-network inference algorithm",
+      "A search ordered by path cost"
+    ],
+    "answer": 0,
+    "explanation": "WalkSAT changes truth assignments locally and may fail to find a satisfying assignment even when one exists.",
+    "topic": "Logic and SAT",
+    "difficulty": "hard"
+  },
+  {
+    "question": "What does a posterior probability such as P(H|E) represent?",
+    "options": [
+      "The probability of evidence before considering a hypothesis",
+      "The probability of hypothesis H after taking evidence E into account",
+      "The cost of an action under a utility function",
+      "The number of states reachable from H"
+    ],
+    "answer": 1,
+    "explanation": "A posterior updates belief in a hypothesis after observing evidence.",
+    "topic": "Bayesian reasoning",
+    "difficulty": "medium"
+  },
+  {
+    "question": "How does a Bayesian network factorize a joint distribution?",
+    "options": [
+      "As a sum of all marginal probabilities",
+      "As a product of unconditional probabilities for every network",
+      "As a product of each variable conditioned on its parents",
+      "As a ratio of utilities to transition costs"
+    ],
+    "answer": 2,
+    "explanation": "The graph lets the joint distribution be written as local conditional distributions.",
+    "topic": "Bayesian networks",
+    "difficulty": "medium"
+  },
+  {
+    "question": "In the chain X -> Y -> Z, what independence follows when Y is observed?",
+    "options": [
+      "X and Y are independent given Z",
+      "Y and Z are always independent given X",
+      "All three variables are mutually independent",
+      "X and Z are conditionally independent given Y"
+    ],
+    "answer": 3,
+    "explanation": "Conditioning on the middle node blocks the chain path between X and Z.",
+    "topic": "Bayesian networks",
+    "difficulty": "hard"
+  },
+  {
+    "question": "In A -> C <- B, what can observing C do to A and B?",
+    "options": [
+      "Make A and B dependent even if they were independent before observing C",
+      "Always make A and B more independent",
+      "Remove the arrows into C",
+      "Prove that A causes B"
+    ],
+    "answer": 0,
+    "explanation": "A collider blocks the path by default; observing it can open the path and induce dependence.",
+    "topic": "Bayesian networks",
+    "difficulty": "hard"
+  },
+  {
+    "question": "What does rejection sampling do with a sample that conflicts with observed evidence?",
+    "options": [
+      "Change the evidence to match",
+      "Discard the sample",
+      "Give the sample a larger weight",
+      "Turn the sample into a maximum-likelihood estimate"
+    ],
+    "answer": 1,
+    "explanation": "Rejection sampling keeps only prior samples consistent with evidence, which can be inefficient for rare evidence.",
+    "topic": "Bayesian networks",
+    "difficulty": "medium"
+  },
+  {
+    "question": "How does likelihood weighting handle evidence nodes?",
+    "options": [
+      "Discard every sample containing evidence",
+      "Sample evidence freely and ignore observed values",
+      "Fix them to observed values and weight each sample by their likelihood",
+      "Remove evidence nodes from the graph"
+    ],
+    "answer": 2,
+    "explanation": "Likelihood weighting clamps evidence and weights a sample by its probability given its parents.",
+    "topic": "Bayesian networks",
+    "difficulty": "hard"
+  },
+  {
+    "question": "Which variables does Gibbs sampling typically resample for a Bayesian-network query?",
+    "options": [
+      "Evidence variables only, without conditioning",
+      "Every variable independently of its neighbors",
+      "Only variables with no parents or children",
+      "Non-evidence variables conditioned on their Markov blankets"
+    ],
+    "answer": 3,
+    "explanation": "A Gibbs update samples one non-evidence variable from its conditional distribution given its Markov blanket.",
+    "topic": "Bayesian networks",
+    "difficulty": "hard"
+  },
+  {
+    "question": "What extra information does MAP estimation use compared with maximum likelihood?",
+    "options": [
+      "A prior probability over parameter values",
+      "Different observed data in every case",
+      "A guarantee that the model is correct",
+      "A reward function for each action"
+    ],
+    "answer": 0,
+    "explanation": "MAP maximizes likelihood times prior; maximum likelihood maximizes data likelihood alone.",
+    "topic": "Bayesian learning",
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the main idea of expectation-maximization with hidden variables?",
+    "options": [
+      "Assign hidden variables arbitrary constants once",
+      "Alternate estimating hidden-variable expectations and improving model parameters",
+      "Search a game tree using minimax",
+      "Maximize reward without observations"
+    ],
+    "answer": 1,
+    "explanation": "EM alternates an expectation step using current parameters with a maximization step that updates them.",
+    "topic": "Bayesian learning",
+    "difficulty": "hard"
+  },
+  {
+    "question": "Under expected-utility theory, how is an action evaluated under uncertainty?",
+    "options": [
+      "Choose the outcome with the smallest probability",
+      "Average outcome names alphabetically",
+      "Weight each possible outcome's utility by its probability and sum",
+      "Ignore probabilities and choose the action with most outcomes"
+    ],
+    "answer": 2,
+    "explanation": "Expected utility combines outcome utility with the probability that the action produces it.",
+    "topic": "Inference and decisions",
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the expected value of information in a decision problem?",
+    "options": [
+      "The number of evidence variables",
+      "The sum of all action costs",
+      "The probability an observation is correct",
+      "The improvement in expected utility from making a better-informed decision"
+    ],
+    "answer": 3,
+    "explanation": "Information is valuable when it can improve a decision's expected utility, after accounting for its cost.",
+    "topic": "Inference and decisions",
+    "difficulty": "hard"
+  },
+  {
+    "question": "What does a utility function represent in decision theory?",
+    "options": [
+      "The decision maker's preference over possible outcomes",
+      "Transition probability between states",
+      "The syntax of a logical sentence",
+      "The number of samples used in inference"
+    ],
+    "answer": 0,
+    "explanation": "Utilities encode how desirable consequences are to a decision maker.",
+    "topic": "Inference and decisions",
+    "difficulty": "medium"
+  },
+  {
+    "question": "With free perfect information, how can the best expected utility compare with acting without it?",
+    "options": [
+      "It must be lower because information adds uncertainty",
+      "It cannot be lower, because the decision maker can ignore the information",
+      "It is always zero",
+      "It is unrelated to available actions"
+    ],
+    "answer": 1,
+    "explanation": "With information, a decision maker can always choose the action they would have chosen without it.",
+    "topic": "Inference and decisions",
+    "difficulty": "hard"
+  },
+  {
+    "question": "What is the Markov property in an MDP?",
+    "options": [
+      "Every state has exactly one successor",
+      "Rewards are identical in every state",
+      "The next-state distribution depends on current state and action, not the full past",
+      "The agent observes the whole future"
+    ],
+    "answer": 2,
+    "explanation": "The current state summarizes the history needed to predict the next state after an action.",
+    "topic": "Markov decision processes",
+    "difficulty": "medium"
+  },
+  {
+    "question": "What does a policy specify in an MDP?",
+    "options": [
+      "One fixed transition for every state",
+      "The sequence of future random events",
+      "All rewards in descending order",
+      "An action choice, or distribution over actions, for each state"
+    ],
+    "answer": 3,
+    "explanation": "A policy tells the agent how to act as a function of its current state.",
+    "topic": "Markov decision processes",
+    "difficulty": "medium"
+  },
+  {
+    "question": "What does the Bellman optimality update do in a discounted MDP?",
+    "options": [
+      "Maximize expected immediate reward plus discounted next-state value",
+      "Minimize the number of states",
+      "Add all future rewards without probabilities",
+      "Choose the action with the largest transition probability only"
+    ],
+    "answer": 0,
+    "explanation": "The Bellman equation compares actions using expected reward now and discounted optimal value afterward.",
+    "topic": "Markov decision processes",
+    "difficulty": "hard"
+  },
+  {
+    "question": "What does value iteration repeatedly update?",
+    "options": [
+      "The number of variables in each state",
+      "Estimated optimal values of states using Bellman backups",
+      "Legal actions without using rewards",
+      "Only transition probabilities from observed states"
+    ],
+    "answer": 1,
+    "explanation": "Value iteration applies Bellman optimality backups until state values stabilize.",
+    "topic": "Markov decision processes",
+    "difficulty": "medium"
+  },
+  {
+    "question": "What does a discount factor gamma close to zero emphasize?",
+    "options": [
+      "Long-term rewards over immediate ones",
+      "States with more outgoing transitions",
+      "Sooner rewards over rewards far in the future",
+      "Actions with low immediate reward"
+    ],
+    "answer": 2,
+    "explanation": "A small discount factor reduces the contribution of future rewards.",
+    "topic": "Markov decision processes",
+    "difficulty": "medium"
+  },
+  {
+    "question": "What feedback does a reinforcement-learning agent commonly receive?",
+    "options": [
+      "A table of optimal actions before learning starts",
+      "A proof each chosen action is optimal",
+      "Only the next state, with no reward",
+      "Rewards evaluating outcomes, rather than a correct action label for every state"
+    ],
+    "answer": 3,
+    "explanation": "RL improves behavior from reward feedback without a supervised action label for each state.",
+    "topic": "Reinforcement learning",
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is the exploration-exploitation tradeoff?",
+    "options": [
+      "Balancing trying uncertain actions with choosing actions already known to work",
+      "Balancing search depth with heuristic accuracy",
+      "Choosing between equivalent state representations",
+      "Balancing training and test examples only"
+    ],
+    "answer": 0,
+    "explanation": "Exploration gathers information; exploitation uses current knowledge to earn reward.",
+    "topic": "Reinforcement learning",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Which target does one-step Q-learning use after a transition to nonterminal state s'?",
+    "options": [
+      "r plus the Q-value of the selected next action, without maximization",
+      "r + gamma times the largest estimated Q-value at s'",
+      "The average Q-value of every state in the episode",
+      "The negative current Q-value, independent of s'"
+    ],
+    "answer": 1,
+    "explanation": "Q-learning is off-policy: its target uses the maximum next-state action value.",
+    "topic": "Reinforcement learning",
+    "difficulty": "hard"
+  },
+  {
+    "question": "What appears in the one-step SARSA update target?",
+    "options": [
+      "The maximum value of every next action regardless of selection",
+      "Only the episode's starting state",
+      "The value of the next action actually selected by the current policy",
+      "A Bayesian-network state probability"
+    ],
+    "answer": 2,
+    "explanation": "SARSA is on-policy and updates from state, action, reward, next state, and next action.",
+    "topic": "Reinforcement learning",
+    "difficulty": "medium"
+  },
+  {
+    "question": "What does temporal-difference learning bootstrap from?",
+    "options": [
+      "Only the final outcome after every episode",
+      "A labeled dataset of optimal actions",
+      "The number of available actions without rewards",
+      "A learned value estimate at a later state"
+    ],
+    "answer": 3,
+    "explanation": "TD methods use reward plus another learned value estimate instead of waiting for a full return.",
+    "topic": "Reinforcement learning",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Why use nonlinear activation functions between neural-network layers?",
+    "options": [
+      "They let stacked layers represent nonlinear input-output relationships",
+      "They guarantee global-optimum training",
+      "They remove the need for data",
+      "They force every output to be a probability"
+    ],
+    "answer": 0,
+    "explanation": "Without nonlinear activations, a stack of linear layers is still only a linear transformation.",
+    "topic": "Deep learning",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Which pattern is a common sign of overfitting?",
+    "options": [
+      "Training and validation performance are both consistently poor",
+      "Training performance improves while validation performance worsens",
+      "Validation improves whenever training data is removed",
+      "The model has fewer parameters than input features"
+    ],
+    "answer": 1,
+    "explanation": "Overfitting fits training-specific detail and generalizes less well to unseen data.",
+    "topic": "Deep learning",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Why can experience replay help train a deep RL agent?",
+    "options": [
+      "It guarantees every stored transition is optimal",
+      "It removes the need for rewards",
+      "Random minibatches reuse transitions and reduce correlation between consecutive updates",
+      "It turns the task into supervised learning with action labels"
+    ],
+    "answer": 2,
+    "explanation": "Replay reuses past experience and random sampling reduces temporal correlation in updates.",
+    "topic": "Deep reinforcement learning",
+    "difficulty": "hard"
+  },
+  {
+    "question": "Why do many deep Q-learning methods use a separate target network?",
+    "options": [
+      "To replace the environment's reward function",
+      "To ensure the policy never explores",
+      "To store every possible state in a table",
+      "To make value targets change more slowly during training"
+    ],
+    "answer": 3,
+    "explanation": "A slowly updated target network reduces rapid feedback between predictions and their targets.",
+    "topic": "Deep reinforcement learning",
+    "difficulty": "hard"
+  }
+]
