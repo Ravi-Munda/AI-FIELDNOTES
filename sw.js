@@ -1,10 +1,10 @@
-const CACHE_NAME = "ai-fieldnotes-v15";
+const CACHE_NAME = "ai-fieldnotes-v17";
 const APP_ROOT = new URL("./", self.registration.scope);
 const CORE_FILES = [
   "./",
   "./index.html",
   "./app.js",
-  "./styles.css?v=15",
+  "./styles.css?v=17",
   "./questions.json?v=100-difficulty-random",
   "./manifest.webmanifest",
   "./favicon.svg",

@@ -1,7 +1,22 @@
     let BANK = [];
     const STORE_KEY = "ai-fieldnotes-attempt-v1";
+    const PROFILE_KEY = "ai-fieldnotes-profile-v1";
     const MARKS_PER_QUESTION = 1;
     const DURATION_MS = 90 * 60 * 1000;
+    const BADGE_RANKS = [
+      { name: "Bronze V", days: 1, tier: "bronze", mark: "V" },
+      { name: "Bronze IV", days: 2, tier: "bronze", mark: "IV" },
+      { name: "Bronze III", days: 3, tier: "bronze", mark: "III" },
+      { name: "Bronze II", days: 4, tier: "bronze", mark: "II" },
+      { name: "Bronze I", days: 5, tier: "bronze", mark: "I" },
+      { name: "Silver", days: 7, tier: "silver", mark: "S" },
+      { name: "Gold", days: 14, tier: "gold", mark: "G" },
+      { name: "Platinum", days: 21, tier: "platinum", mark: "P" },
+      { name: "Diamond", days: 30, tier: "diamond", mark: "D" },
+      { name: "Master", days: 45, tier: "master", mark: "M" },
+      { name: "Grandmaster", days: 60, tier: "grandmaster", mark: "GM" },
+      { name: "Pro Master", days: 100, tier: "pro-master", mark: "PM" }
+    ];
     let attempt = null;
     let timerHandle = null;
     let toastHandle = null;
@@ -72,6 +87,178 @@
 
     function saveAttempt() {
       try { localStorage.setItem(STORE_KEY, JSON.stringify(attempt)); } catch (_) {}
+    }
+
+    function emptyProfile() {
+      return { currentStreak: 0, bestStreak: 0, lastQuizDate: "", completedQuizzes: 0 };
+    }
+
+    function isValidDateKey(value) {
+      if (value === "") return true;
+      const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
+      if (!match) return false;
+      const year = Number(match[1]);
+      const month = Number(match[2]);
+      const day = Number(match[3]);
+      const date = new Date(Date.UTC(year, month - 1, day));
+      return date.getUTCFullYear() === year && date.getUTCMonth() === month - 1 && date.getUTCDate() === day;
+    }
+
+    function loadProfile() {
+      try {
+        const raw = localStorage.getItem(PROFILE_KEY);
+        if (!raw) return emptyProfile();
+        const value = JSON.parse(raw);
+        if (!value || !Number.isInteger(value.currentStreak) || value.currentStreak < 0 ||
+            !Number.isInteger(value.bestStreak) || value.bestStreak < value.currentStreak ||
+            !Number.isInteger(value.completedQuizzes) || value.completedQuizzes < 0 ||
+            !isValidDateKey(value.lastQuizDate)) return emptyProfile();
+        return {
+          currentStreak: value.currentStreak,
+          bestStreak: value.bestStreak,
+          lastQuizDate: value.lastQuizDate,
+          completedQuizzes: value.completedQuizzes
+        };
+      } catch (_) { return emptyProfile(); }
+    }
+
+    function saveProfile(profile) {
+      try { localStorage.setItem(PROFILE_KEY, JSON.stringify(profile)); } catch (_) {}
+    }
+
+    function localDateKey(date) {
+      return date.getFullYear() + "-" + String(date.getMonth() + 1).padStart(2, "0") + "-" +
+        String(date.getDate()).padStart(2, "0");
+    }
+
+    function dateOrdinal(dateKey) {
+      const parts = dateKey.split("-").map(Number);
+      return Math.floor(Date.UTC(parts[0], parts[1] - 1, parts[2]) / 86400000);
+    }
+
+    function badgeRankIndex(streak) {
+      let index = -1;
+      for (let i = 0; i < BADGE_RANKS.length; i++) {
+        if (streak < BADGE_RANKS[i].days) break;
+        index = i;
+      }
+      return index;
+    }
+
+    function liveStreak(profile, todayKey) {
+      if (!profile.lastQuizDate) return 0;
+      const gap = dateOrdinal(todayKey) - dateOrdinal(profile.lastQuizDate);
+      return gap >= 0 && gap <= 1 ? profile.currentStreak : 0;
+    }
+
+    function recordQuizCompletion(finishedAt) {
+      const profile = loadProfile();
+      const previousRank = badgeRankIndex(profile.bestStreak);
+      const todayKey = localDateKey(new Date(finishedAt));
+      const gap = profile.lastQuizDate ? dateOrdinal(todayKey) - dateOrdinal(profile.lastQuizDate) : null;
+      let countedToday = true;
+
+      if (!profile.lastQuizDate) {
+        profile.currentStreak = 1;
+        profile.lastQuizDate = todayKey;
+      } else if (gap === 0) {
+        countedToday = false;
+      } else if (gap === 1) {
+        profile.currentStreak += 1;
+        profile.lastQuizDate = todayKey;
+      } else if (gap > 1) {
+        profile.currentStreak = 1;
+        profile.lastQuizDate = todayKey;
+      } else {
+        countedToday = false;
+      }
+
+      profile.completedQuizzes += 1;
+      profile.bestStreak = Math.max(profile.bestStreak, profile.currentStreak);
+      saveProfile(profile);
+
+      const rankIndex = badgeRankIndex(profile.bestStreak);
+      return {
+        profile,
+        currentStreak: liveStreak(profile, todayKey),
+        rankIndex,
+        newBadge: countedToday && rankIndex > previousRank ? BADGE_RANKS[rankIndex] : null,
+        countedToday,
+        alreadyCountedToday: gap === 0
+      };
+    }
+
+    function dayLabel(days) {
+      return days + " " + (days === 1 ? "day" : "days");
+    }
+
+    function renderProgressDashboard() {
+      const profile = loadProfile();
+      const todayKey = localDateKey(new Date());
+      const current = liveStreak(profile, todayKey);
+      const rankIndex = badgeRankIndex(profile.bestStreak);
+      const rank = rankIndex >= 0 ? BADGE_RANKS[rankIndex] : null;
+      const currentNode = document.getElementById("streak-current");
+      const messageNode = document.getElementById("streak-message");
+      const rankNode = document.getElementById("rank-current");
+      const sealNode = document.getElementById("rank-seal");
+      const bestNode = document.getElementById("streak-best");
+      const nextLabel = document.getElementById("rank-next-label");
+      const nextCount = document.getElementById("rank-next-count");
+      const progress = document.getElementById("rank-progress");
+      const ladder = document.getElementById("badge-ladder");
+
+      currentNode.textContent = String(current);
+      bestNode.textContent = "Best streak: " + dayLabel(profile.bestStreak);
+      if (current === 0) {
+        messageNode.textContent = profile.bestStreak > 0
+          ? "Your previous streak ended. Complete a quiz today to start another."
+          : "Complete a quiz today to start your streak.";
+      } else if (profile.lastQuizDate === todayKey) {
+        messageNode.textContent = "Today's quiz is counted. Come back tomorrow to continue your streak.";
+      } else {
+        messageNode.textContent = "Complete a quiz today to keep your streak going.";
+      }
+
+      rankNode.textContent = rank ? rank.name : "Unranked";
+      sealNode.textContent = rank ? rank.mark : "—";
+      sealNode.className = "rank-seal" + (rank ? " rank-" + rank.tier : "");
+
+      if (rankIndex >= BADGE_RANKS.length - 1) {
+        nextLabel.textContent = "Top rank unlocked";
+        nextCount.textContent = "Pro Master";
+        progress.max = 1;
+        progress.value = 1;
+      } else {
+        const nextRank = BADGE_RANKS[rankIndex + 1];
+        const previousThreshold = rank ? rank.days : 0;
+        const span = nextRank.days - previousThreshold;
+        const advanced = Math.max(0, Math.min(span, profile.bestStreak - previousThreshold));
+        nextLabel.textContent = (rank ? "Next badge: " : "First badge: ") + nextRank.name;
+        nextCount.textContent = advanced + " / " + dayLabel(span);
+        progress.max = span;
+        progress.value = advanced;
+      }
+
+      ladder.replaceChildren();
+      BADGE_RANKS.forEach((badge, index) => {
+        const unlocked = profile.bestStreak >= badge.days;
+        const tile = document.createElement("div");
+        tile.className = "rank-tile rank-" + badge.tier + (unlocked ? " unlocked" : "") +
+          (index === rankIndex ? " current" : "");
+        tile.setAttribute("role", "listitem");
+        tile.setAttribute("aria-label", badge.name + ", " + (unlocked ? "unlocked" : "locked") +
+          ", requires a " + dayLabel(badge.days) + " streak");
+        const token = document.createElement("span");
+        token.className = "rank-token";
+        token.textContent = badge.mark;
+        const name = document.createElement("strong");
+        name.textContent = badge.name;
+        const requirement = document.createElement("small");
+        requirement.textContent = dayLabel(badge.days);
+        tile.append(token, name, requirement);
+        ladder.appendChild(tile);
+      });
     }
 
     function showView(which) {
@@ -340,8 +527,10 @@
       attempt.timedOut = timedOut;
       attempt.finishedAt = Date.now();
       saveAttempt();
+      const streakEvent = recordQuizCompletion(attempt.finishedAt);
+      renderProgressDashboard();
       if (timerHandle) clearInterval(timerHandle);
-      renderResults();
+      renderResults(streakEvent);
     }
 
     function escapeHtml(value) {
@@ -350,7 +539,41 @@
       }[char]));
     }
 
-    function renderResults() {
+    function createRewardResult(streakEvent) {
+      const card = document.createElement("section");
+      card.className = "reward-result";
+      card.setAttribute("aria-live", "polite");
+      const rank = streakEvent.rankIndex >= 0 ? BADGE_RANKS[streakEvent.rankIndex] : null;
+      const seal = document.createElement("div");
+      seal.className = "rank-seal reward-seal" + (streakEvent.newBadge ? " rank-" + streakEvent.newBadge.tier : rank ? " rank-" + rank.tier : "");
+      seal.textContent = streakEvent.newBadge ? streakEvent.newBadge.mark : rank ? rank.mark : "*";
+      seal.setAttribute("aria-hidden", "true");
+
+      const copy = document.createElement("div");
+      copy.className = "reward-result-copy";
+      const eyebrow = document.createElement("span");
+      eyebrow.className = "progress-label-small";
+      eyebrow.textContent = streakEvent.newBadge ? "Badge unlocked" : "Daily streak update";
+      const title = document.createElement("strong");
+      title.textContent = streakEvent.newBadge ? streakEvent.newBadge.name : rank ? rank.name : "Keep showing up";
+      const detail = document.createElement("p");
+      if (streakEvent.newBadge) {
+        detail.textContent = "You earned " + streakEvent.newBadge.name + " with a " +
+          dayLabel(streakEvent.profile.bestStreak) + " best streak.";
+      } else if (streakEvent.countedToday) {
+        detail.textContent = "Current streak: " + dayLabel(streakEvent.currentStreak) +
+          ". Best streak: " + dayLabel(streakEvent.profile.bestStreak) + ".";
+      } else if (streakEvent.alreadyCountedToday) {
+        detail.textContent = "Today's quiz was already counted. Come back tomorrow to continue your streak.";
+      } else {
+        detail.textContent = "Complete quizzes on consecutive days to build your next streak.";
+      }
+      copy.append(eyebrow, title, detail);
+      card.append(seal, copy);
+      return card;
+    }
+
+    function renderResults(streakEvent) {
       showView("result");
       const totalMarks = BANK.length * MARKS_PER_QUESTION;
       const correct = attempt.score / MARKS_PER_QUESTION;
@@ -398,6 +621,7 @@
       statSide.appendChild(statCard("Time used", timeText));
       hero.append(scoreCard, statSide);
       wrap.appendChild(hero);
+      wrap.appendChild(createRewardResult(streakEvent));
 
       const topicScores = new Map();
       for (let position = 0; position < BANK.length; position++) {
@@ -529,6 +753,7 @@
       const startButton = document.getElementById("start-btn");
       const endSavedButton = document.getElementById("end-saved-btn");
       const appStatus = document.getElementById("app-status");
+      renderProgressDashboard();
       try {
         const response = await fetch("./questions.json?v=100-difficulty-random", { cache: "no-store" });
         if (!response.ok) throw new Error("Quiz data could not be loaded.");
@@ -600,15 +825,17 @@
       window.navigator.standalone === true;
 
     clearSavedButton.addEventListener("click", () => {
-      if (!window.confirm("Clear this browser's saved quiz answers and progress?")) return;
+      if (!window.confirm("Clear this browser's saved quiz answers, streak and rank badges?")) return;
       try {
         localStorage.removeItem(STORE_KEY);
+        localStorage.removeItem(PROFILE_KEY);
         document.getElementById("end-saved-btn").classList.add("hidden");
         const startButton = document.getElementById("start-btn");
         if (!startButton.disabled) {
           startButton.innerHTML = 'Start the quiz <span class="arrow">&#8599;</span>';
         }
-        showToast("Saved quiz progress cleared.");
+        renderProgressDashboard();
+        showToast("Saved quiz, streak and badge progress cleared.");
       } catch (_) {
         showToast("This browser could not clear the saved progress.");
       }

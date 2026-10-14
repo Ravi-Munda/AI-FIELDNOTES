@@ -46,3 +46,78 @@
 @media(max-width:680px){.progress-section{padding:12px 0 20px}.progress-panel{padding:17px}.streak-overview{grid-template-columns:1fr;gap:17px}.rank-summary{min-width:0}.badge-ladder{grid-template-columns:repeat(3,minmax(0,1fr))}.badge-heading{align-items:flex-start;flex-direction:column;gap:5px}.rank-tile{min-height:84px}.reward-result{align-items:flex-start;padding:15px}.reward-seal{width:44px;height:44px;flex-basis:44px;border-radius:13px}}
 @media(max-width:370px){.badge-ladder{grid-template-columns:repeat(2,minmax(0,1fr))}.rank-progress-caption{font-size:9px}.streak-number strong{font-size:48px}}
 
+/* Phone layout and touch targets */
+@media(max-width:680px){
+  html,body{width:100%;min-width:0}
+  .shell,#welcome-view,#quiz-view,#result-view,.hero-copy,.visual-card,.progress-panel,.quiz-layout,.quiz-side,.question-panel,.result-wrap{min-width:0}
+  .topbar{gap:8px}
+  .brand{min-width:0;gap:8px;white-space:nowrap}
+  .top-right{flex:0 0 auto}
+  .hero{padding-top:38px}
+  .hero-copy p,.source-note,.privacy-note{overflow-wrap:anywhere}
+  .hero-copy .pill-row{gap:7px}
+  .pill{padding:6px 9px;font-size:10px}
+  .start-actions{display:grid;grid-template-columns:minmax(0,1fr);align-items:stretch}
+  .start-actions .primary-btn,.start-actions .quiet-btn{width:100%;min-height:46px;white-space:normal}
+  .visual-card{width:100%;padding:19px}
+  .visual-top{gap:8px;font-size:9px}
+  .visual-caption{font-size:9px}
+  .mini-stat span{font-size:8px}
+  .quiz-layout{gap:10px}
+  .quiz-side{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:0 12px}
+  .progress-track{grid-column:1;grid-row:1;margin:0 0 7px}
+  .timer-box{position:static;grid-column:2;grid-row:1;align-self:center;margin:0;padding:4px 0 7px;white-space:nowrap}
+  .progress-label{grid-column:1 / -1;grid-row:2}
+  .question-nav{grid-column:1 / -1;grid-row:3;width:100%;gap:7px;padding:3px 1px 7px;overscroll-behavior-x:contain;scrollbar-width:thin;-webkit-overflow-scrolling:touch}
+  .nav-number{flex-basis:40px;width:40px;height:40px;min-height:40px}
+  .side-legend{display:none}
+  .question-panel{min-height:440px;min-height:calc(100svh - 235px);min-height:calc(100dvh - 235px);padding:18px 15px}
+  .q-topline{align-items:flex-start;gap:8px;margin-bottom:22px}
+  .q-topline-info{min-width:0;gap:6px}
+  .q-topic{max-width:100%;overflow-wrap:anywhere}
+  .flag-btn{flex:0 0 auto;min-height:40px;padding:7px 3px}
+  .question-text{font-size:clamp(22px,6vw,27px);overflow-wrap:anywhere}
+  .option{grid-template-columns:28px minmax(0,1fr) 16px;min-height:50px;gap:9px;padding:12px 10px}
+  .option-text{min-width:0;overflow-wrap:anywhere}
+  .q-bottom{flex-wrap:wrap;align-items:stretch}
+  .q-bottom>.quiet-btn,.q-actions,.q-actions .primary-btn{min-height:44px}
+  .q-actions .primary-btn{white-space:normal}
+  .break-row{grid-template-columns:minmax(88px,1.1fr) minmax(35px,1fr) 38px;gap:7px;padding:10px}
+  .break-name{overflow-wrap:anywhere}
+  .review-box summary{grid-template-columns:28px minmax(0,1fr) auto}
+  .review-q{min-width:0;overflow-wrap:anywhere}
+  .review-score{white-space:nowrap}
+  .modal{max-height:calc(100svh - 40px);max-height:calc(100dvh - 40px);overflow-y:auto}
+  .modal-actions{flex-wrap:wrap}
+  .modal-actions button{min-height:44px}
+  .toast{width:max-content;max-width:calc(100vw - 32px);text-align:center;overflow-wrap:anywhere}
+}
+@media(max-width:370px){
+  .shell{padding-left:max(12px,env(safe-area-inset-left));padding-right:max(12px,env(safe-area-inset-right))}
+  h1{font-size:clamp(38px,12vw,46px)}
+  .brand{font-size:13px;gap:6px}
+  .brand-mark{width:30px;height:30px}
+  .top-right{gap:6px}
+  .install-btn{min-height:40px}
+  .visual-card{padding:15px}
+  .orbit-wrap{overflow:hidden}
+  .q-bottom{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px}
+  .q-bottom>.quiet-btn,.q-actions{width:100%;min-width:0}
+  .q-actions{gap:0}
+  .q-actions .primary-btn{width:100%;padding:9px 7px;font-size:11px}
+  .q-bottom>.quiet-btn{padding:9px 7px;font-size:11px}
+  .progress-panel{padding:14px}
+  .rank-progress-caption{align-items:flex-start}
+  .rank-progress-caption span:first-child{min-width:0}
+  .rank-progress-caption span:last-child{white-space:nowrap}
+  .review-content{padding-left:44px}
+}
+@media(orientation:landscape) and (max-height:500px) and (max-width:900px){
+  .hero{grid-template-columns:minmax(0,1.2fr) minmax(220px,.8fr);gap:20px;padding:24px 0}
+  .hero h1{font-size:clamp(38px,7vw,58px)}
+  .visual-card{min-height:290px}
+  .orbit-wrap{height:150px}
+  .quiz-layout{grid-template-columns:180px minmax(0,1fr)}
+  .question-panel{min-height:calc(100dvh - 110px)}
+}
+
